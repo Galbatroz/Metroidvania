@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Item : MonoBehaviour {
+public class Item : MonoBehaviour{
 
     public Sprite iconeItem;
 
@@ -173,4 +173,5 @@ public class Item : MonoBehaviour {
         GameManager.instance.RemoveItem(nomeDoItem);
         GameMenu.instance.TocaSomDoBotao();
     }
+
 }

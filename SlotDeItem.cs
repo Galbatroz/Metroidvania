@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SlotDeItem : MonoBehaviour {
+public class SlotDeItem : MonoBehaviour
+{
 
     public Image ImagemDoSlot;
     public Text quantidadeTexto;

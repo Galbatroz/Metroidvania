@@ -5,92 +5,155 @@ using UnityEngine.UI;
 
 public class GameMenu : MonoBehaviour
 {
-
     public GameObject menuDoJogo;
-    public GameObject inventario;
-    public GameObject[] janelas;
-    public GameObject janelaDeConfirmacao;
-    public GameObject janelaDeAcao;
-
     private StatusPersonagem statusDoJogador;
-
     public static GameMenu instance;
 
-    public Item itemAtivo;
-    public Text botaoDeUso, nomeDoItem, descricaoDoItem;
-    public SlotDeItem[] slotDeItens;
+    [Header("Menu e Janelas")]
+    [SerializeField] private GameObject inventario;
+    [SerializeField] private GameObject[] janelas;
+    [SerializeField] private GameObject janelaDeConfirmacao;
+    [SerializeField] private GameObject janelaDeAcao;
 
-    public string itemSelecionado;
+    [SerializeField] private Item itemAtivo;
+    [SerializeField] private Text botaoDeUso, nomeDoItem, descricaoDoItem;
+    [SerializeField] private SlotDeItem[] slotDeItens;
+    [SerializeField] private string itemSelecionado;
+    [SerializeField] private bool foraDoInventario = true;
+
     [Header("Botoes do Menu")]
-    public Button primeiroBotao;
-    public Button segundoBotao;
-    public Button terceiroBotao;
+    [SerializeField] private Button primeiroBotao;
+    [SerializeField] private Button segundoBotao;
+    [SerializeField] private Button terceiroBotao;
+
     [Header("Botoes do Inventario")]
-    public Button primeiroItem;
-    public Button acaoBotao;
-    public Button discartaBotao;
-    public Button confirmaBotao;
-    public Button cancelaBotao;
+    [SerializeField] private Button primeiroItem;
 
+    [Header("Botoes do Menu de Ação")]
+    [SerializeField] private Button acaoBotao;
+    [SerializeField] private Button discartaBotao;
 
-    public bool foraDoInventario = true;
+    [Header("Botoes do Menu de Confirmação")]
+    [SerializeField] private Button confirmaBotao;
+    [SerializeField] private Button cancelaBotao;
 
+    [Header("Status do Personagem")]
+    [SerializeField] private Text nomeTexto;
+    [SerializeField] private Text levelTexto;
+    [SerializeField] private Text expTexto;
+    [SerializeField] private Text expProximoTexto;
+    [SerializeField] private Text hpTexto;
+    [SerializeField] private Text mpTexto;
+    [SerializeField] private Text forcaTexto;
+    [SerializeField] private Text vitalidadeTexto;
+    [SerializeField] private Text sorteTexto;
+    [SerializeField] private Text intelectoTexto;
+    [SerializeField] private Text ataquePrincipalTexto;
+    [SerializeField] private Text ataqueSecundarioTexto;
+    [SerializeField] private Text nomeArmaSecundaria;
+    [SerializeField] private Text defesaTexto;
+    [SerializeField] private Text criticoTexto;
+    [SerializeField] private Text fogoTexto;
+    [SerializeField] private Text geloTexto;
+    [SerializeField] private Text acidoTexto;
+    [SerializeField] private Text esmagadorTexto;
+    [SerializeField] private Text cortanteTexto;
+    [SerializeField] private Text perfuranteTexto;
 
-    //Campos de Entrada do Menu.===================================
-    [Header("Campos do Menu")]
-    public Text nomeTexto;
-    public Text levelTexto;
-    public Text expTexto;
-    public Text expProximoTexto;
-    public Text hpTexto;
-    public Text mpTexto;
-    public Text forcaTexto;
-    public Text vitalidadeTexto;
-    public Text sorteTexto;
-    public Text intelectoTexto;
-    public Text ataquePrincipalTexto;
-    public Text ataqueSecundarioTexto;
-    public Text defesaTexto;
-    public Text criticoTexto;
-    public Text fogoTexto;
-    public Text geloTexto;
-    public Text acidoTexto;
-    public Text esmagadorTexto;
-    public Text cortanteTexto;
-    public Text perfuranteTexto;
+    [Header("Icones das Resistencias")]
+    [SerializeField] private Image personagemFoto;
+    [SerializeField] private Image fogoFoto;
+    [SerializeField] private Image geloFoto;
+    [SerializeField] private Image acidoFoto;
+    [SerializeField] private Image esmagadorFoto;
+    [SerializeField] private Image cortanteFoto;
+    [SerializeField] private Image perfuranteFoto;
 
-    public Image personagemFoto;
-    public Image fogoFoto;
-    public Image geloFoto;
-    public Image acidoFoto;
-    public Image esmagadorFoto;
-    public Image cortanteFoto;
-    public Image perfuranteFoto;
-    //=============================================================
+    [Header("Nome dos Equipamentos")]
+    [SerializeField] private Text nomeLuva;
+    [SerializeField] private Text nomeArmadura;
+    [SerializeField] private Text nomeElmo;
+    [SerializeField] private Text nomeColar;
+    [SerializeField] private Text nomeBota;
+    [SerializeField] private Text nomeAnel;
+    [SerializeField] private Text nomeBerloque;
+    [SerializeField] private Text nomeArmaPrimaria;
 
-    //Campos dos Status
-    [Header("Campos dos Status")]
-    public Text nomeArmadura;
-    public Text nomeElmo;
-    public Text nomeLuva;
-    public Text nomeColar;
-    public Text nomeBota;
-    public Text nomeAnel;
-    public Text nomeBerloque;
-    public Text nomeArmaPrimaria;
-    public Text nomeArmaSecundaria;
+    [Header("Sprites dos Equipamentos")]
+    [SerializeField] private Image spriteLuva;
+    [SerializeField] private Image spriteArmadura;
+    [SerializeField] private Image spriteElmo;
+    [SerializeField] private Image spriteColar;
+    [SerializeField] private Image spriteBota;
+    [SerializeField] private Image spriteAnel;
+    [SerializeField] private Image spriteBerloque;
+    [SerializeField] private Image spriteArmaPrimaria;
 
-    public Text armaduraDefesa;
+    [Header("Status da Armadura")]
+    [SerializeField] private Text armaduraDefesa;
+    [SerializeField] private Text armaduraResistenciaFogo;
+    [SerializeField] private Text armaduraResistenciaGelo;
+    [SerializeField] private Text armaduraResistenciaAcido;
+    [SerializeField] private Text armaduraResistenciaCortante;
+    [SerializeField] private Text armaduraResistenciaPerfurante;
+    [SerializeField] private Text armaduraResistenciaEsmagador;
 
-    public Text armaPrimariaDano;
-    public Text armaSecundariaDano;
-    public Text armasCritico;
-    public Text armasAcidoResistencia;
-    public Text armasFogoResistencia;
-    public Text armasGeloResistencia;
-    public Text armasEsmagadorResistencia;
-    public Text armasCortanteResistencia;
-    public Text armasPerfuranteResistencia;
+    [Header("Status da Colar")]
+    [SerializeField] private Text colarDefesa;
+    [SerializeField] private Text colarCritico;
+    [SerializeField] private Text colarResistenciaFogo;
+    [SerializeField] private Text colarResistenciaGelo;
+    [SerializeField] private Text colarResistenciaAcido;
+    [SerializeField] private Text colarResistenciaCortante;
+    [SerializeField] private Text colarResistenciaPerfurante;
+    [SerializeField] private Text colarResistenciaEsmagador;
+
+    [Header("Status da Luva")]
+    [SerializeField] private Text luvaDefesa;
+    [SerializeField] private Text luvaCritico;
+    [SerializeField] private Text luvaResistenciaFogo;
+    [SerializeField] private Text luvaResistenciaGelo;
+    [SerializeField] private Text luvaResistenciaAcido;
+    [SerializeField] private Text luvaResistenciaCortante;
+    [SerializeField] private Text luvaResistenciaPerfurante;
+    [SerializeField] private Text luvaResistenciaEsmagador;
+
+    [Header("Status da Bota")]
+    [SerializeField] private Text botaDefesa;
+    [SerializeField] private Text botaResistenciaFogo;
+    [SerializeField] private Text botaResistenciaGelo;
+    [SerializeField] private Text botaResistenciaAcido;
+    [SerializeField] private Text botaResistenciaCortante;
+    [SerializeField] private Text botaResistenciaPerfurante;
+    [SerializeField] private Text botaResistenciaEsmagador;
+
+    [Header("Status da Anel")]
+    [SerializeField] private Text anelCritico;
+    [SerializeField] private Text anelResistenciaFogo;
+    [SerializeField] private Text anelResistenciaGelo;
+    [SerializeField] private Text anelResistenciaAcido;
+    [SerializeField] private Text anelResistenciaCortante;
+    [SerializeField] private Text anelResistenciaPerfurante;
+    [SerializeField] private Text anelResistenciaEsmagador;
+
+    [Header("Status da Berloque")]
+    [SerializeField] private Text berloqueCritico;
+    [SerializeField] private Text berloqueResistenciaFogo;
+    [SerializeField] private Text berloqueResistenciaGelo;
+    [SerializeField] private Text berloqueResistenciaAcido;
+    [SerializeField] private Text berloqueResistenciaCortante;
+    [SerializeField] private Text berloqueResistenciaPerfurante;
+    [SerializeField] private Text berloqueResistenciaEsmagador;
+
+    [Header("Status das Armas")]
+    [SerializeField] private Text armaPrimariaDano;
+    [SerializeField] private Text armasCritico;
+    [SerializeField] private Text armasAcidoResistencia;
+    [SerializeField] private Text armasFogoResistencia;
+    [SerializeField] private Text armasGeloResistencia;
+    [SerializeField] private Text armasEsmagadorResistencia;
+    [SerializeField] private Text armasCortanteResistencia;
+    [SerializeField] private Text armasPerfuranteResistencia;
 
     void Start()
     {
@@ -99,9 +162,8 @@ public class GameMenu : MonoBehaviour
 
     void Update()
     {
-
         NavegarMenu();
-        //AtualizaMenu();
+        AtualizaMenu();
     }
 
     public void TrocaJanela(int numeroJanela)
@@ -246,17 +308,6 @@ public class GameMenu : MonoBehaviour
             armasEsmagadorResistencia.gameObject.SetActive(false);
         }
 
-        if (statusDoJogador.nomeMaoSecundaria != "")
-        {
-            nomeArmaSecundaria.text = statusDoJogador.nomeMaoSecundaria;
-        }
-
-        else
-        {
-            nomeArmaSecundaria.text = "Vazio";
-            armaSecundariaDano.gameObject.SetActive(false);
-        }
-
 
     } // Atializa as informaçoes do menu.
 
@@ -320,7 +371,7 @@ public class GameMenu : MonoBehaviour
             primeiroItem.Select();
             TocaSomDoBotao();
         }
-    }
+    } //Remove o item do Inventario.
 
     public void AbrirStatus()
     {
@@ -330,7 +381,7 @@ public class GameMenu : MonoBehaviour
     public void TocaSomDoBotao()
     {
         AudioManager.instance.PlaySFX(0);
-    }
+    } //Toca FX navegação do Menu.
 
     public void AbrirJanelaDeConfirmacao()
     {
@@ -342,7 +393,7 @@ public class GameMenu : MonoBehaviour
         confirmaBotao.Select();
         acaoBotao.interactable = false;
         discartaBotao.interactable = false;
-    }
+    } //Pede Confirmação após Equipar/Usar Item.
 
     public void AbrirJanelaDeAcao()
     {
@@ -356,7 +407,6 @@ public class GameMenu : MonoBehaviour
 
     public void NavegarMenu()
     {
-        TocaSomNavegacao();
         if (Input.GetButtonDown("Start"))
         {         
             if (menuDoJogo.activeInHierarchy)
@@ -436,12 +486,5 @@ public class GameMenu : MonoBehaviour
             slotDeItens[i].GetComponent<Button>().interactable = true;
         }
     }
-
-    public void TocaSomNavegacao()
-    {
-        if (Input.GetButton("Horizontal") || Input.GetButton("Vertical") && inventario.activeInHierarchy)
-        {
-            TocaSomDoBotao();
-        }
-    }
+    
 }
