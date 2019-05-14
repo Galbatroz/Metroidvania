@@ -21,6 +21,6 @@ public class SlotDeItem : MonoBehaviour
 
             }
         }
-        //Adicionar Verificacao de Janela de Shop.
+        ///Adicionar Verificacao de Janela de Shop.
     }
 }
